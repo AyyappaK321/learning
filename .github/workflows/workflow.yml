@@ -27,7 +27,7 @@ jobs:
         RESOURCE_GROUP_REGION: southcentralus
         SERVER_NAME: gihtubactions
         ADMIN_LOGIN: testadmin
-      run: >
+      run: |
         powershell -command "& '${{ env.OUTPUT_PATH }}\IaC\AzCLI\vmcreation.ps1'" 
         -servicePrincipal ${{ secrets.SERVICE_PRINCIPAL_APPID }}
         -servicePrincipalSecret ${{ secrets.SERVICE_PRINCIPAL_SECRET }} 
