@@ -48,7 +48,7 @@ Env:
 
         -resourceGroupName %RESOURCE_GROUP%
 
-        -resourceGroupNameRegion %RESOURCE_GROUP_REGION%
+        -resourceGroupRegion %RESOURCE_GROUP_REGION%
 
         -serverName %SERVER_NAME%
 
