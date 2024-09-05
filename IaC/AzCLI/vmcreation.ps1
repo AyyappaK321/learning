@@ -20,7 +20,6 @@ $azureSubscriptionName,
 [string]
 $resourceGroupName,
 
-
 [Parameter(Mandatory=$True)]
 [string]
 $resourceGroupNameRegion,
@@ -34,7 +33,7 @@ $serverName,
 $adminLogin,
 
 [Parameter(Mandatory=$True)]
-[string]
+[String]
 $adminPassword
 )
 
