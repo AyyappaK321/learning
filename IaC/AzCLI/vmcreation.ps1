@@ -1,42 +1,41 @@
 [CmdletBinding()]
 param(
-[Parameter(Mandatory=$True)]
-[string]
-$servicePrincipal,
+    [Parameter(Mandatory = $True)]
+    [string]
+    $servicePrincipal,
 
-[Parameter(Mandatory=$True)]
-[string]
-$servicePrincipalSecert,
+    [Parameter(Mandatory = $True)]
+    [string]
+    $servicePrincipalSecret,
 
-[Parameter(Mandatory=$True)]
-[string]
-$servicePrincipalTenantId,
+    [Parameter(Mandatory = $True)]
+    [string]
+    $servicePrincipalTenantId,
 
-[Parameter(Mandatory=$True)]
-[string]
-$azureSubscriptionName,
+    [Parameter(Mandatory = $True)]
+    [string]
+    $azureSubscriptionName,
 
-[Parameter(Mandatory=$True)]
-[string]
-$resourceGroupName,
+    [Parameter(Mandatory = $True)]
+    [string]
+    $resourceGroupName,
 
-[Parameter(Mandatory=$True)]
-[string]
-$resourceGroupNameRegion,
+    [Parameter(Mandatory = $True)]
+    [string]
+    $resourceGroupNameRegion,
 
-[Parameter(Mandatory=$True)]
-[string]
-$serverName,
+    [Parameter(Mandatory = $True)]  
+    [string]
+    $serverName,
 
-[Parameter(Mandatory=$True)]
-[string]
-$adminLogin,
+    [Parameter(Mandatory = $True)]  
+    [string]
+    $adminLogin,
 
-[Parameter(Mandatory=$True)]
-[String]
-$adminPassword
+    [Parameter(Mandatory = $True)]  
+    [String]
+    $adminPassword
 )
-
 
 
 #region Login
@@ -54,6 +53,7 @@ Write-Output ""
 
 #region Subscription
 #This sets the subscription the resources will be created in
+
 Write-Output "Setting default azure subscription..."
 az account set `
     --subscription $azureSubscriptionName
