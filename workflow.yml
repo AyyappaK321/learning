@@ -36,22 +36,13 @@ Env:
 
       run: >
 
-        powershell -command "& '${{ env.OUTPUT_PATH }}\IaC\AzCLI\vmcreation.ps1'"
-
-        -servicePrincipal ${{ secrets.SERVICE_PRINCIPAL_APPID }}
-
-        -servicePrincipalSecret ${{ secrets.SERVICE_PRINCIPAL_SECRET }}
-
-        -servicePrincipalTenantId ${{ secrets.SERVICE_PRINCIPAL_TENANTID }}
-
-        -azureSubscriptionName ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-        -resourceGroupName %RESOURCE_GROUP%
-
-        -resourceGroupNameRegion %RESOURCE_GROUP_REGION%
-
-        -serverName %SERVER_NAME%
-
-        -adminLogin %ADMIN_LOGIN%
-
-        -adminPassword ${{ secrets.ADMIN_PASSWORD }}
+        powershell -command "& 'D:\a\learning\learning\IaC\AzCLI\vmcreation.ps1' \
+      -servicePrincipal ${{ secrets.SERVICE_PRINCIPAL_APPID }} \
+      -servicePrincipalSecret ${{ secrets.SERVICE_PRINCIPAL_SECRET }} \
+      -servicePrincipalTenantId ${{ secrets.SERVICE_PRINCIPAL_TENANTID }} \
+      -azureSubscriptionName ${{ secrets.AZURE_SUBSCRIPTION_ID }} \
+      -resourceGroupName $env:RESOURCE_GROUP \
+      -resourceGroupNameRegion $env:RESOURCE_GROUP_REGION \
+      -serverName $env:SERVER_NAME \
+      -adminLogin $env:ADMIN_LOGIN \
+      -adminPassword ${{ secrets.ADMIN_PASSWORD }}"
