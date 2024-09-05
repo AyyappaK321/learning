@@ -20,6 +20,7 @@ $azureSubscriptionName,
 [string]
 $resourceGroupName,
 
+
 [Parameter(Mandatory=$True)]
 [string]
 $resourceGroupNameRegion,
