@@ -1,0 +1,29 @@
+name: Run Azure Login test 
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+        uses: actions/checkout@v3
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        tenant-id: 5dc3a3b1-17d6-4a7b-bdf7-be515c61bd24
+        subscription-id: 1bf4fc51-5180-49ed-957c-35936b2b380b
+        client-id: 3bd49e5c-eca2-4013-94ea-2c088c8f0e86
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az group show --name "Testgithub_RG"
+
+
+    - name: Azure PowerShell action
+      uses: azure/powershell@v2
+      with:
+        azPSVersion: latest
+        inlineScript: |
+          Get-AzResourceGroup -Name "Testgithub_RG"
