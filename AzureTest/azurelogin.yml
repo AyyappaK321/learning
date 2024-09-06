@@ -18,7 +18,7 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-          az group show --name "Testgithub_RG"
+          az group show --name "rg-managedidentity"
 
 
     - name: Azure PowerShell action
@@ -26,4 +26,4 @@ jobs:
       with:
         azPSVersion: latest
         inlineScript: |
-          Get-AzResourceGroup -Name "Testgithub_RG"
+          Get-AzResourceGroup -Name "rg-managedidentity"
