@@ -28,7 +28,11 @@ jobs:
         SERVER_NAME: gihtubactions
         ADMIN_LOGIN: testadmin
       run: |
-        powershell -command "& '${{ env.OUTPUT_PATH }}\IaC\AzCLI\vmcreation.ps1'" `
+        Write-Host "Service Principal: ${{ secrets.SERVICE_PRINCIPAL_APPID }}"
+        Write-Host "Service Principal: ${{ secrets.SERVICE_PRINCIPAL_SECRET }}"
+        Write-Host "Running the VM creation script..."
+        
+        powershell -File '${{ env.OUTPUT_PATH }}\IaC\AzCLI\vmcreation.ps1' `
         -servicePrincipal "${{ secrets.SERVICE_PRINCIPAL_APPID }}" `
         -servicePrincipalSecret "${{ secrets.SERVICE_PRINCIPAL_SECRET }}" `
         -servicePrincipalTenantId "${{ secrets.SERVICE_PRINCIPAL_TENANTID }}" `
