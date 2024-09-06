@@ -87,8 +87,8 @@ catch {
     }
 az vm open-port --port 3389 --resource-group $resourceGroupName --name $serverName
 az vm show `
-  --resource-group myResourceGroup `
-  --name myWindowsVM `
+  --resource-group $resourceGroupName `
+  --name $serverName `
   --show-details `
   --query [publicIps] `
   --output tsv
