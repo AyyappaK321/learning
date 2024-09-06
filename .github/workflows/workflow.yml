@@ -25,7 +25,7 @@ jobs:
       env:
         RESOURCE_GROUP: rg-githubitpro
         RESOURCE_GROUP_REGION: Eastus2
-        SERVER_NAME: gihtubactions
+        SERVER_NAME: githubactions
         ADMIN_LOGIN: testadmin
       run: |
         Write-Host "Service Principal: ${{ secrets.SERVICE_PRINCIPAL_APPID }}"
