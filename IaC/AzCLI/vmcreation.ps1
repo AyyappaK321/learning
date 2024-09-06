@@ -1,40 +1,31 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $True)]
-    [string]
-    $servicePrincipal,
+    [string]$servicePrincipal,
 
     [Parameter(Mandatory = $True)]
-    [string]
-    $servicePrincipalSecret,
+    [string]$servicePrincipalSecret,
 
     [Parameter(Mandatory = $True)]
-    [string]
-    $servicePrincipalTenantId,
+    [string]$servicePrincipalTenantId,
 
     [Parameter(Mandatory = $True)]
-    [string]
-    $azureSubscriptionName,
+    [string]$azureSubscriptionName,
 
     [Parameter(Mandatory = $True)]
-    [string]
-    $resourceGroupName,
+    [string]$resourceGroupName,
 
     [Parameter(Mandatory = $True)]
-    [string]
-    $resourceGroupNameRegion,
+    [string]$resourceGroupNameRegion,
 
     [Parameter(Mandatory = $True)]  
-    [string]
-    $serverName,
+    [string]$serverName,
 
     [Parameter(Mandatory = $True)]  
-    [string]
-    $adminLogin,
+    [string]$adminLogin,
 
     [Parameter(Mandatory = $True)]  
-    [String]
-    $adminPassword
+    [String]$adminPassword
 )
 
 
