@@ -1,6 +1,9 @@
 name: Azure VM Snapshot
 
 on: [push]
+permissions:
+  id-token: write
+  contents: read  # This is the minimum required to check out the repository
   
 jobs:
   create-snapshot:
