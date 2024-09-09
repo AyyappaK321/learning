@@ -48,7 +48,7 @@ jobs:
             --resource-group rg-githubitpro} `
             --name "githubactions-snapshot-$(Get-Date -Format yyyyMMddHHmmss)" `
             --source $env:os_disk_id
-        } else {
+          } else {
           Write-Error "OS Disk ID not found. Exiting..."
           exit 1
         }
