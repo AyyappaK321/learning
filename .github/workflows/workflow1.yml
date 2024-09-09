@@ -30,8 +30,8 @@ jobs:
       id: get_os_disk
       run: |
        $osDiskId = az vm show `
-       --resource-group ${{ secrets.RESOURCE_GROUP }} `
-       --name ${{ secrets.VM_NAME }} `
+       --resource-group rg-githubitpro `
+       --name githubactions `
        --query "storageProfile.osDisk.managedDisk.id" `
        --output tsv
         echo "os_disk_id=$osDiskId" >> $env:GITHUB_ENV
