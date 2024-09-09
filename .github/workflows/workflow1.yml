@@ -46,7 +46,7 @@ jobs:
         if ($env:os_disk_id) {
           az snapshot create `
             --resource-group rg-githubitpro} `
-            --name "githubactions}-snapshot-$(Get-Date -Format yyyyMMddHHmmss)" `
+            --name "githubactions-snapshot-$(Get-Date -Format yyyyMMddHHmmss)" `
             --source $env:os_disk_id
         } else {
           Write-Error "OS Disk ID not found. Exiting..."
