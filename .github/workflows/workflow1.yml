@@ -1,0 +1,58 @@
+name: Azure VM Snapshot
+
+on: [push]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  create-snapshot:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Azure CLI
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.SERVICE_PRINCIPAL_APPID }}
+        tenant-id: ${{ secrets.SERVICE_PRINCIPAL_TENANTID }}
+        client-secret: ${{ secrets.SERVICE_PRINCIPAL_SECRET }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Deallocate the VM (Optional but recommended)
+      run: |
+        az vm deallocate --resource-group rg-githubitpro --name githubactions
+
+    - name: Get OS Disk ID
+      id: get_os_disk
+      run: |
+        $osDiskId = az vm show `
+          --resource-group rg-githubitpro `
+          --name githubactions `
+          --query "storageProfile.osDisk.managedDisk.id" `
+          --output tsv
+        echo "os_disk_id=$osDiskId" >> $env:GITHUB_ENV
+        echo "OS Disk ID: $osDiskId"  # Debugging step
+
+    - name: Verify OS Disk ID
+      run: |
+        echo "Verifying OS Disk ID: $env:os_disk_id"  # Debugging step
+
+    - name: Create Snapshot
+      run: |
+        if ($env:os_disk_id) {
+          az snapshot create `
+            --resource-group rg-githubitpro} `
+            --name "githubactions}-snapshot-$(Get-Date -Format yyyyMMddHHmmss)" `
+            --source $env:os_disk_id
+        } else {
+          Write-Error "OS Disk ID not found. Exiting..."
+          exit 1
+        }
+
+    - name: Start the VM (Optional)
+      run: |
+        az vm start --resource-group rg-githubitpro --name githubactions
