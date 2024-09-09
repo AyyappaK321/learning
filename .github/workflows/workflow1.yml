@@ -42,11 +42,13 @@ jobs:
         echo "Verifying OS Disk ID: $env:os_disk_id"  # Debugging step
 
     - name: Create Snapshot
+      shell: powershell
       run: |
         if ($env:os_disk_id) {
+          $snapshotName = "githubactions-snapshot-$(Get-Date -Format yyyyMMddHHmmss)"
           az snapshot create `
             --resource-group rg-githubitpro} `
-            --name "githubactions-snapshot-$(Get-Date -Format yyyyMMddHHmmss)" `
+            --name $snapshotName `
             --source $env:os_disk_id
           } else {
           Write-Error "OS Disk ID not found. Exiting..."
