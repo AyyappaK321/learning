@@ -1,8 +1,7 @@
 name: Azure VM Snapshot
 
-on:
+on: [push]
   
-
 jobs:
   create-snapshot:
     runs-on: ubuntu-latest
@@ -14,21 +13,21 @@ jobs:
     - name: Set up Azure CLI
       uses: azure/login@v1
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        client-id: ${{ secrets.SERVICE_PRINCIPAL_APPID }}
+        tenant-id: ${{ secrets.SERVICE_PRINCIPAL_TENANTID }}
+        client-secret: ${{ secrets.SERVICE_PRINCIPAL_SECRET }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Deallocate the VM (Optional but recommended)
       run: |
-        az vm deallocate --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.VM_NAME }}
+        az vm deallocate --resource-group rg-githubitpro --name githubactions
 
     - name: Get OS Disk ID
       id: get_os_disk
       run: |
         os_disk_id=$(az vm show \
-          --resource-group ${{ secrets.RESOURCE_GROUP }} \
-          --name ${{ secrets.VM_NAME }} \
+          --resource-group rg-githubitpro \
+          --name githubactions \
           --query "storageProfile.osDisk.managedDisk.id" \
           --output tsv)
         echo "::set-output name=os_disk_id::$os_disk_id"
@@ -36,10 +35,10 @@ jobs:
     - name: Create Snapshot
       run: |
         az snapshot create \
-          --resource-group ${{ secrets.RESOURCE_GROUP }} \
-          --name "${{ secrets.VM_NAME }}-snapshot-$(date +%Y%m%d%H%M%S)" \
+          --resource-group rg-githubitpro \
+          --name "githubactions-snapshot-$(date +%Y%m%d%H%M%S)" \
           --source ${{ steps.get_os_disk.outputs.os_disk_id }}
 
     - name: Start the VM (Optional)
       run: |
-        az vm start --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.VM_NAME }}
+        az vm start --resource-group rg-githubitpro --name githubactions}
