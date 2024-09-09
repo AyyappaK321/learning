@@ -47,7 +47,7 @@ jobs:
         if ($env:os_disk_id) {
           $snapshotName = "githubactions-snapshot-$(Get-Date -Format yyyyMMddHHmmss)"
           az snapshot create `
-            --resource-group rg-githubitpro} `
+            --resource-group rg-githubitpro `
             --name $snapshotName `
             --source $env:os_disk_id
           } else {
