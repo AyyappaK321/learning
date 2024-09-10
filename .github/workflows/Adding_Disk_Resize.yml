@@ -74,6 +74,4 @@ jobs:
       shell: pwsh
       run: |
         # Restart the VM after resizing
-        az vm restart `
-          --resource-group $env:RESOURCE_GROUP `
-          --name $env:VM_NAME
+        az vm restart --resource-group rg-githubitpro --name githubactions
