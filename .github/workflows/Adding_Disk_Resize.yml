@@ -26,8 +26,8 @@ jobs:
       shell: pwsh
       run: |
         # Set environment variables
-        $env:RESOURCE_GROUP = 'rg-githubitpro'
-        $env:VM_NAME = 'githubactions'
+        $env:RESOURCE_GROUP = "rg-githubitpro"
+        $env:VM_NAME = "githubactions"
         $env:DISK_NAME = "$($env:VM_NAME)-additional-disk01"
         $env:DISK_SIZE = 128  # Size in GB
 
@@ -62,8 +62,8 @@ jobs:
       shell: pwsh
       run: |
         # Set environment variables
-        $env:RESOURCE_GROUP = 'rg-githubitpro'
-        $env:VM_NAME = 'githubactions'
+        $env:RESOURCE_GROUP = "rg-githubitpro"
+        $env:VM_NAME = "githubactions"
         $env:VM_SIZE = 'Standard_D4s_v3'  # Set new VM size
 
         # Resize the VM
