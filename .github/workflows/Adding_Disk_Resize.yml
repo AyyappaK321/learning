@@ -62,7 +62,7 @@ jobs:
         # Set environment variables
         $env:RESOURCE_GROUP = "rg-githubitpro"
         $env:VM_NAME = "githubactions"
-        $env:VM_SIZE = 'Standard_D4s_v3'  # Set new VM size
+        $env:VM_SIZE = 'D2s_v3'  # Set new VM size
 
         # Resize the VM
         az vm resize `
