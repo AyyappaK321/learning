@@ -28,7 +28,7 @@ jobs:
         # Variables
         $env:RESOURCE_GROUP="rg-githubitpro"
         $env:VM_NAME="githubactions"
-        $env:DISK_NAME="githubactions-additional-disk"
+        $env:DISK_NAME="githubactions-additional-disk01"
         $env:DISK_SIZE=128  # Size in GB
 
         # Create a new managed disk
