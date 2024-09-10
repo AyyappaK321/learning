@@ -39,8 +39,7 @@ jobs:
           az vm disk attach `
             --resource-group $env:RESOURCE_GROUP `
             --vm-name $env:VM_NAME `
-            --name $env:DISK_NAME `
-            --new
+            --name $env:DISK_NAME
         } else {
           Write-Host "Disk does not exist. Creating a new disk and attaching it to the VM."
           # Create a new managed disk
@@ -54,8 +53,7 @@ jobs:
           az vm disk attach `
             --resource-group $env:RESOURCE_GROUP `
             --vm-name $env:VM_NAME `
-            --name $env:DISK_NAME `
-            --new
+            --name $env:DISK_NAME
         }
 
     - name: Resize VM to increase memory
