@@ -1,0 +1,65 @@
+name: Azure VM - Add Disk and Resize
+
+on: [push]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  modify-vm:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Azure CLI
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.SERVICE_PRINCIPAL_APPID }}
+        tenant-id: ${{ secrets.SERVICE_PRINCIPAL_TENANTID }}
+        client-secret: ${{ secrets.SERVICE_PRINCIPAL_SECRET }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Add New Disk to the VM
+      run: |
+        # Variables
+        RESOURCE_GROUP=rg-githubitpro
+        VM_NAME=githubactions
+        DISK_NAME="githubactions-additional-disk"
+        DISK_SIZE=128  # Size in GB
+
+        # Create a new managed disk
+        az disk create `
+          --resource-group rg-githubitpro `
+          --name $DISK_NAME `
+          --size-gb $DISK_SIZE `
+          --sku Premium_LRS
+
+        # Attach the new disk to the VM
+        az vm disk attach `
+          --resource-group rg-githubitpro `
+          --vm-name $VM_NAME `
+          --name $DISK_NAME `
+          --new
+
+    - name: Resize VM to increase memory
+      run: |
+        # Variables
+        RESOURCE_GROUP=rg-githubitpro
+        VM_NAME=githubactions
+        VM_SIZE="Standard_D4s_v3"  # Set new VM size (this size has more memory)
+
+        # Resize the VM
+        az vm resize `
+          --resource-group $RESOURCE_GROUP `
+          --name $VM_NAME `
+          --size $VM_SIZE
+
+    - name: Restart VM after resizing
+      run: |
+        # Restart the VM after resizing
+        az vm restart `
+          --resource-group rg-githubitpro `
+          --name githubactions
