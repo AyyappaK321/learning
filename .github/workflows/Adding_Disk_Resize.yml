@@ -23,39 +23,41 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Add New Disk to the VM
+      shell: pwsh
       run: |
         # Variables
-        RESOURCE_GROUP=rg-githubitpro
-        VM_NAME=githubactions
-        DISK_NAME="githubactions-additional-disk"
-        DISK_SIZE=128  # Size in GB
+        $env:RESOURCE_GROUP=rg-githubitpro
+        $env:VM_NAME=githubactions
+        $env:DISK_NAME="githubactions-additional-disk"
+        $env:DISK_SIZE=128  # Size in GB
 
         # Create a new managed disk
         az disk create `
-          --resource-group rg-githubitpro `
-          --name $DISK_NAME `
-          --size-gb $DISK_SIZE `
+          --resource-group $env:RESOURCE_GROUP `
+          --name $env:DISK_NAME `
+          --size-gb $env:DISK_SIZE `
           --sku Premium_LRS
 
         # Attach the new disk to the VM
         az vm disk attach `
-          --resource-group rg-githubitpro `
-          --vm-name $VM_NAME `
-          --name $DISK_NAME `
+          --resource-group $env:RESOURCE_GROUP `
+          --vm-name $env:VM_NAME `
+          --name $env:DISK_NAME `
           --new
 
     - name: Resize VM to increase memory
+      shell: pwsh
       run: |
         # Variables
-        RESOURCE_GROUP=rg-githubitpro
-        VM_NAME=githubactions
-        VM_SIZE="Standard_D4s_v3"  # Set new VM size (this size has more memory)
+        $env:RESOURCE_GROUP=rg-githubitpro
+        $env:VM_NAME=githubactions
+        $env:VM_SIZE="Standard_D4s_v3"  # Set new VM size (this size has more memory)
 
         # Resize the VM
         az vm resize `
-          --resource-group $RESOURCE_GROUP `
-          --name $VM_NAME `
-          --size $VM_SIZE
+          --resource-group $env:RESOURCE_GROUP `
+          --name $env:VM_NAME `
+          --size $env:VM_SIZE
 
     - name: Restart VM after resizing
       run: |
